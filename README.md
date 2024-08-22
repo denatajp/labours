@@ -1,5 +1,4 @@
-
-![](https://img.shields.io/badge/PHP-purple?style=for-the-badge&logo=php) ![](https://img.shields.io/badge/Bootstrap-blue?style=for-the-badge&logo=Bootstrap) ![](https://img.shields.io/badge/Javascript-grey?style=for-the-badge&logo=javascript) 
+![logo-removebg-preview](https://github.com/user-attachments/assets/3156c7ea-0154-4ce1-85e4-b5f2a0fe1a28)
 
 # Introduction
 
