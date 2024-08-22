@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="styleLogin.css" rel="stylesheet" type="text/css">
+    <link href="/css/styleLogin.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <nav>
         <div class="wrapper">
-            <div class="logo"><a href=''>Labours.</a></div>
+            <div class="logo">
+                <a href="/"><img style="float:left; width: 170px; margin-top:14px;" href="/home" src="/logo/logo.png" alt="">
+            </div>
             <div class="menu">
                 <ul>
                     <li><a href="signup" class="btn-sgnUp">Daftar</a></li>

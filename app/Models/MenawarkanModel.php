@@ -4,11 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class LaboursModel extends Model
+class MenawarkanModel extends Model
 {
-    protected $table = "pekerjaan";
-    protected $allowedFields = ['kodePekerjaan', 'namaPekerjaan', 'waktuPekerjaan', 'deskripsiPekerjaan', 'alamat', 'foto'];
+    protected $table = "menawarkan";
+    protected $allowedFields = ['NIK', 'kodePekerjaan', 'created_at', 'updated_at', 'statusPosting'];
     protected $primaryKey = 'kodePekerjaan';
+    protected $useTimestamps = true;
 
     public function dataPekerjaan()
     {
@@ -18,11 +19,6 @@ class LaboursModel extends Model
     public function getPekerjaan($kode)
     {
         return $this->where(['kodePekerjaan' => $kode])->first();
-    }
-
-    public function simpan($record) 
-    {
-
     }
 
 }

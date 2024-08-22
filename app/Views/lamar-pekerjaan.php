@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lamar Pekerjaan</title>
-    <link href="styleLamar.css" rel="stylesheet" type="text/css">
+    <link href="/css/styleLamar.css" rel="stylesheet" type="text/css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
@@ -48,7 +48,7 @@
             margin: auto;
             display: flex;
             line-height: 80px;
-            position: sticky;
+            /* position: sticky; */
             background-color: #0091A5;
             top: 0;
         }
@@ -97,7 +97,7 @@
         /* CSS Lamar Pekerjaan*/
         .lamarPekerjaan1 {
             width: 700px;
-            height: 100px;
+            height: 130px;
             padding: 180px;
             margin-top: -50px;
             border-radius: 10px;
@@ -131,7 +131,7 @@
             text-align: center;
         }
 
-        img {
+        #job {
             margin: 20px;
             width: 300px;
             height: 200px;
@@ -222,8 +222,14 @@
 <body>
     <nav>
         <div class="wrapper">
-            <div class="logo"><a href=''>Labours.</a></div>
+            <div class="logo">
+            <a href="/home"><img style="float:left; width: 170px; margin-top:14px;" href="/home" src="/logo/logo.png" alt="">
+
+            </div>
             <div class="menu">
+                <ul>
+                    <li><a style="text-decoration: none;" href="/profil" class="akun"> <?= session()->get('username'); ?> <img style="border-radius:100%; width:30px; height:30px; object-fit:fill;" src="/userImg/<?= session()->get('user')['foto']; ?>"></a></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -232,20 +238,43 @@
             <h1 class="judul">Lamar Pekerjaan</h1>
             <div class="lamarPekerjaan2">
                 <div class="gambarKeterangan">
-                    <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg">
-                    <h4><?= $jenisPekerjaan; ?></h4>
+                    <img id="job" src="/imgJob/<?= $pekerjaan['foto']; ?>">
+                    <h4><?= $pekerjaan['namaPekerjaan']; ?></h4>
                 </div>
                 <div>
-                    <form class="lamar" action="/proseslamar/<?= $kodePekerjaan; ?>" method="post">
+                    <form class="lamar" action="/proseslamar/<?= $pekerjaan['kodePekerjaan']; ?>" method="post">
                         <div>
                             <label for="">Email</label>
-                            <input type="text" placeholder="example@gmail.com" name="email">
+                            <input type="text" placeholder="example@gmail.com" name="email" readonly value="<?= $email['email']; ?>">
                         </div>
                         <div>
                             <label for="">Nomor Telepon</label>
-                            <input type="text" name="telepon">
+                            <input type="text" name="telepon" readonly value="<?= $email['nomor_telepon']; ?>">
                         </div>
-                        <button>Lamar</button>
+                        <div>
+                            <label for="">Pengalaman Kerja</label>
+                            <div style="position: relative; display: inline-block;">
+                                <input type="text" name="pengalaman" id="pengalaman" placeholder="">
+                                <span style="position: absolute; top: 0; right: 5px; padding: 7px;">Bulan</span>
+                            </div>
+                            <script>
+                                var input = document.getElementById('pengalaman');
+
+                                input.addEventListener('keydown', function(e) {
+                                    // Mengabaikan tombol non-angka kecuali tombol navigasi dan kontrol (misalnya panah, backspace)
+                                    if (e.key !== "Backspace" && e.key !== "ArrowLeft" && e.key !== "ArrowRight" &&
+                                        e.key !== "ArrowUp" && e.key !== "ArrowDown" &&
+                                        e.key !== "Tab" && e.key !== "Delete" && e.key !== "Home" &&
+                                        e.key !== "End") {
+                                        // Mencegah input karakter selain angka
+                                        if (!/[\d]/.test(e.key)) {
+                                            e.preventDefault();
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                        <button style="background: #0091A5;">Lamar</button>
                     </form>
                 </div>
             </div>

@@ -24,10 +24,10 @@
     </nav>
     <div class="container">
         <div class="signupsuccess">
-            <img src="successIcon.png" style="width: 200px;" alt="">
-            <h1>Berhasil Daftar!</h1>
-            <h4>Silahkan login untuk melanjutkan</h4>
-            <button onfocus="window.location.href = '/login';">Login</button>
+            <img src="/logo/rejected.png" style="width: 200px;" alt="">
+            <h1>Maaf, akun anda ditolak</h1>
+            <h4>Akun anda tidak disetujui, mohon untuk mengisi data dengan benar</h4>
+            <button onfocus="window.location.href = '/login';">Back</button>
         </div>
     </div>
 </body>

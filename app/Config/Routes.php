@@ -29,7 +29,13 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
+
+
+//Landing Page
+$routes->get('/', 'LaboursController::index');
+
+
 $routes->match(['post', 'get'], '/signup', 'LaboursController::signup');
 $routes->get('/signupsuccess', 'LaboursController::signUpSuccess');
 $routes->match(['post', 'get'], '/login', 'LaboursController::login');
@@ -40,9 +46,41 @@ $routes->get('/lamar/(:segment)', 'LaboursController::lamar/$1');
 $routes->match(['post', 'get'], '/proseslamar/(:segment)', 'LaboursController::prosesLamar/$1');
 
 $routes->get('/postingansaya', 'LaboursController::postinganSaya');
-$routes->get('/penilaian', 'LaboursController::penilaian');
+$routes->get('/penilaian/(:segment)', 'LaboursController::penilaian/$1');
 $routes->get('/deskripsi/(:segment)', 'LaboursController::deskripsi/$1');
 $routes->get('/logout', 'LaboursController::logout');
+
+//tambah pekerjaan
+$routes->match(['post', 'get'], '/tambahpekerjaan', 'LaboursController::simpan');
+
+//melihat lift pelamar siapa aja
+$routes->get('/listpelamar/(:segment)', 'LaboursController::listPelamar/$1');
+
+//menghapus satu pekerjaan
+$routes->get('/hapus/(:segment)', 'LaboursController::hapus/$1');
+
+//mengedit pekerjaan
+// $routes->get('/edit/(:segment)', 'LaboursController::edit/$1');
+$routes->match(['post', 'get'], '/edit/(:segment)', 'LaboursController::edit/$1');
+
+//profil
+$routes->get('/profil', 'LaboursController::profil');
+
+//verifikasi admin
+$routes->get('/admin', 'LaboursController::admin');
+$routes->get('/verifikasi', 'LaboursController::verifikasi');
+$routes->match(['post', 'get'], '/verif', 'LaboursController::verif');
+$routes->match(['post', 'get'], '/tolak', 'LaboursController::tolak');
+
+//Memproses data pelamar
+$routes->match(['post', 'get'], '/prosespelamar/(:segment)', 'LaboursController::prosesPelamar/$1');
+
+//Proses nilai
+$routes->match(['post', 'get'], '/prosesnilai/(:segment)', 'LaboursController::prosesNilai/$1');
+
+$routes->match(['post', 'get'], '/search', 'LaboursController::search');
+
+
 
 
 

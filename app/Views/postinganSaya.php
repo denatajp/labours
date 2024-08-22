@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -88,10 +88,13 @@
 <body>
     <nav>
         <div class="wrapper">
-            <div class="logo"><a href=''></a></div>
+            <div class="logo">
+                <a href="/home"><img href="/home" src="/logo/logo.png" alt=""></a>
+            </div>
             <div class="menu">
                 <ul>
-                    <li><a href="signUp.html" class="btn-sgnUp">Daftar</a></li>
+                    <li><a href="/profil" class="akun"> <?= session()->get('user')['nama']; ?> <img style="border-radius:100%; width:30px; height:30px; object-fit:fill;" src="/userImg/<?= session()->get('user')['foto']; ?>" alt=""></a></li>
+
                 </ul>
             </div>
         </div>
@@ -105,12 +108,12 @@
                     <div class="row my-1">
                         <h5 style="color: #FFFFFF;">Pekerjaan Saya</h5>
                     </div>
-                    <?php $i=1; ?>
+                    <?php $i = 1; ?>
                     <?php foreach ($dataMelamar as $dm) : ?>
                         <button type="button" class="pekerjaan" data-bs-toggle="modal" data-bs-target="#modalPekerjaanSaya<?= $i; ?>">
-                            <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg" alt="">
-                            <h5><?= $dm['jenisPekerjaan']; ?></h5>
-                            <p>Yogyakarta</p>
+                            <img src="/imgJob/<?= $dm['fotoPekerjaan']; ?>" alt="">
+                            <h5><?= $dm['namaPekerjaan']; ?></h5>
+                            <p><?= $dm['alamat']; ?></p>
                         </button>
 
                         <!-- Modal -->
@@ -118,89 +121,136 @@
                             <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Deskripsi Pekerjaan</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel"><?= $dm['namaPekerjaan']; ?></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <img style="max-width: 100%;" src="<?= $dm['sampul']; ?>" alt="">
-                                        <h2><?= $dm['jenisPekerjaan']; ?></h2>
-                                        <p style="text-align: left;">- Lokasi : Sleman</p>
-                                        <p style="text-align: left;">- Durasi : <?= $dm['waktuPekerjaan']; ?></p>
-                                        <p style="text-align: left;">- Fasilitas : Alat-alat disediakan</p>
-                                        <h6 class="inline">Status : <h6 class="text-success"><?= $dm['status']; ?></h6></h6>
+                                        <div class="text-center">
+                                            <img style="max-width: 100%;" src="/imgJob/<?= $dm['fotoPekerjaan']; ?>" alt=""><br>
+                                        </div>
+                                        <h2>Deskripsi Pekerjaan</h2>
+                                        <p style="text-align: left;"><i class="bi bi-card-text me-2"></i> <?= $dm['deskripsiPekerjaan']; ?></p>
+                                        <p style="text-align: left;"><i class="bi bi-geo-alt-fill me-2"></i> <?= $dm['alamat']; ?></p>
+                                        <p style="text-align: left;"><i class="bi bi-hourglass-split me-2"></i> <?= $dm['waktuPekerjaan']; ?></p>
+                                        <p style="text-align: left;">Status :
+                                            <?php if ($dm['status'] == 'kirim') : ?>
+                                                <span><i class="bi bi-send-check"></i> <?= $dm['status']; ?></span>
+                                            <?php endif; ?>
+
+                                            <?php if ($dm['status'] == 'Diterima') : ?>
+                                                <span class="text-success"><i class="bi bi-check2"> </i><?= $dm['status']; ?></span>
+                                            <?php endif; ?>
+
+                                            <?php if ($dm['status'] == 'Ditolak') : ?>
+                                                <span class="text-danger"><i class="bi bi-x-lg"> </i><?= $dm['status']; ?></span>
+                                            <?php endif; ?>
+
+                                            <?php if ($dm['status'] == 'Selesai') : ?>
+                                                <span class="text-primary"><i class="bi bi-check2-all"> </i><?= $dm['status']; ?></span>
+                                            <?php endif; ?>
+                                        <p>
+                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                                            <style>
+                                                .checked {
+                                                    color: orange;
+                                                }
+                                            </style>
+
+                                        <p style="text-align: left;">Penilaian :
+                                            <?php if ($dm['penilaian'] != '-') : ?>
+                                                <?= $dm['penilaian']; ?>
+                                            <?php else : ?>
+                                                -
+                                            <?php endif; ?>
+                                        </p>
                                     </div>
                                     <div class="modal-footer">
+                                        <button type="button" onclick="window.location.href = 'mailto:<?= $dm['email']; ?>?subject=Lamaran Pekerjaan&body=Halo, bapak/ibu <?= $dm['nama'] ?>.'" class="btn btn-success">Hubungi Pembuat Kerja</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
-
-                    <!-- <button type="button" class="pekerjaan" data-bs-toggle="modal" data-bs-target="#modalPekerjaanSaya">
-                        <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg" alt="">
-                        <h5>Memotong Rumput</h5>
-                        <p>Yogyakarta</p>
-                    </button> -->
-
                 </div>
             </div>
 
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Daftar Pelamar</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <button class="pekerjaan">
-                                <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg" alt="">
-                                <h5>Axel Tandilangi K.</h5>
-                                <p>Mahasiswa, Yogyakarta</p>
-                            </button>
-                            <button class="pekerjaan">
-                                <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg" alt="">
-                                <h5>Denata</h5>
-                                <p>Mahasiswa, Yogyakarta</p>
-                            </button>
-                            <button class="pekerjaan">
-                                <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg" alt="">
-                                <h5>Mikhael Puntito</h5>
-                                <p>Mahasiswa, Yogyakarta</p>
-                            </button>
-                            <button class="pekerjaan">
-                                <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg" alt="">
-                                <h5>Jonathan</h5>
-                                <p>Mahasiswa, Yogyakarta</p>
-                            </button>
-                            <button class="pekerjaan">
-                                <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg" alt="">
-                                <h5>Dwiki</h5>
-                                <p>Mahasiswa, Yogyakarta</p>
-                            </button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger">Hapus</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="col-6 d-flex align-items-center">
                 <div class="daftarPekerjaan">
                     <div class="row my-1">
                         <h5 style="color: #FFFFFF;">Postingan Saya</h5>
                     </div>
-                    <button type="button" class="pekerjaan" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <img src="https://asset.kompas.com/crops/o1LWGsxHzhwi7y8weX75ORdUcuk=/0x0:938x625/750x500/data/photo/2022/01/17/61e51ddd38e41.jpg" alt="">
-                        <h5>Memotong Rumput</h5>
-                        <p>Yogyakarta</p>
-                    </button>
+                    <?php $i = 1; ?>
+                    <?php foreach ($dataPostingan as $ds) : ?>
+                        <button type="button" class="pekerjaan" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $i ?>">
+                            <img src="/imgJob/<?= $ds['foto']; ?>" alt="">
+                            <h5><?= $ds['namaPekerjaan']; ?></h5>
+                            <p><?= $ds['alamat']; ?></p>
+
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal<?= $i++ ?>" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"><?= $ds['namaPekerjaan']; ?></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-center">
+                                            <img class="mx-auto" style="max-width: 100%;" src="/imgJob/<?= $ds['foto']; ?>" alt=""><br>
+                                        </div>
+                                        <h2>Deskripsi Pekerjaan</h2>
+                                        <p style="text-align: left;"><i class="bi bi-card-text me-2"></i> <?= $ds['deskripsiPekerjaan']; ?></p>
+                                        <p style="text-align: left;"><i class="bi bi-geo-alt-fill me-2"></i> <?= $ds['alamat']; ?></p>
+                                        <p style="text-align: left;"><i class="bi bi-hourglass-split me-2"></i> <?= $ds['waktuPekerjaan']; ?></p>
+
+                                        <!-- Jika pekerjaan belum didapat pekerjanya -->
+                                        <?php if ($ds['statusPosting'] == 'Belum ada pekerja') : ?>
+                                            <p style="text-align: left;"><i class="bi bi-x-lg me-2"></i> <span class="text-danger"><?= $ds['statusPosting']; ?></span></p>
+                                        <?php endif; ?>
+
+                                        <!-- Jika pekerja sudah dapat -->
+                                        <?php if ($ds['statusPosting'] == 'Sudah ada pekerja') : ?>
+                                            <p style="text-align: left;"><i class="bi bi-check-all me-2"></i> <span class="text-success"><?= $ds['statusPosting']; ?></span></p>
+                                            <?php foreach ($pelamarDiterima as $pd) : ?>
+                                                <?php if ($ds['kodePekerjaan'] == $pd['kodePekerjaan']) : ?>
+                                                    <p style="text-align: left;"><i class="bi bi-person me-2"></i> <span><?= $pd['nama']; ?> | <a style="text-decoration: none;" href="/penilaian/<?= $ds['kodePekerjaan']; ?>">Beri Penilaian</a></span> </p>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+
+                                        <!-- Jika pekerjaan selesai, penilaian sudah diberikan -->
+                                        <?php if ($ds['statusPosting'] == 'Selesai') : ?>
+                                            <p style="text-align: left;"><i class="bi bi-check-all me-2"></i> <span class="text-success"><?= $ds['statusPosting']; ?></span></p>
+                                            <?php foreach ($pelamarSelesai as $ps) : ?>
+                                                <?php if ($ds['kodePekerjaan'] == $ps['kodePekerjaan']) : ?>
+                                                    <p style="text-align: left;"><i class="bi bi-person me-2"></i> <span><?= $ps['nama']; ?> | <?= $ps['nilai']; ?></span> </p>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <button onclick="window.location.href = '/hapus/<?= $ds['kodePekerjaan']; ?>';" class="btn btn-outline-danger">Hapus</button>
+                                            </div>
+                                            <div class="col">
+                                                <button onclick="window.location.href= '/edit/<?= $ds['kodePekerjaan']; ?>';" class="btn btn-outline-warning">Ubah</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" onclick="window.location.href = '/listpelamar/<?= $ds['kodePekerjaan']; ?>';" class="btn btn-primary">Lihat Daftar Pelamar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
 

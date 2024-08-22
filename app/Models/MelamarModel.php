@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class MelamarModel extends Model
 {
     protected $table = "melamar";
-    protected $allowedFields = ['nik', 'kodePekerjaan', 'status', 'penilaian', 'created_at', 'updated_at', 'telepon'];
+    protected $allowedFields = ['nik', 'kodePekerjaan', 'status', 'penilaian', 'created_at', 'updated_at', 'telepon', 'pengalaman'];
     protected $primaryKey = 'kodePekerjaan';
     protected $useTimestamps = true;
 
@@ -23,7 +23,8 @@ class MelamarModel extends Model
             'kodePekerjaan' => $data['kodePekerjaan'],
             'status' => $data['status'],
             'penilaian' => $data['penilaian'],
-            'telepon' => $data['telepon']
+            'telepon' => $data['telepon'],
+            'pengalaman' => $data['pengalaman']
         ]);
     }
 
