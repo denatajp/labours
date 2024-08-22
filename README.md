@@ -1,8 +1,6 @@
-![logo-removebg-preview](https://github.com/user-attachments/assets/3156c7ea-0154-4ce1-85e4-b5f2a0fe1a28)
-
 # Introduction
 
-![logo](https://github.com/user-attachments/assets/7037f63e-5f93-48b4-a26c-1823d936d984)
+![logo-removebg-preview](https://github.com/user-attachments/assets/3156c7ea-0154-4ce1-85e4-b5f2a0fe1a28)
 
 Labours is a web-based application design that provides information services on odd jobs around the user. This application was created as an intermediary between job seekers and job owners. 
 
