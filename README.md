@@ -14,4 +14,5 @@ The idea of making this application is similar to other existing job application
 
 
 # Galery
+![image](https://github.com/user-attachments/assets/ea4f85fc-633f-4f04-a9ed-ce98c967f6fb)
 
