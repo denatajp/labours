@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <title>Postingan | Labours</title>
+  <style>
+    body {
+      background-color: #D9D9D9;
+    }
+
+    .daftarPekerjaan {
+      width: 100%;
+      height: 30em;
+      background-color: #0091A5;
+      border-radius: 5px;
+      padding: 3%;
+      overflow: auto;
+    }
+
+    .deskripsiPekerjaan {
+      background-color: #bbbbbb;
+      border-radius: 5px;
+      padding: 1em;
+    }
+
+    .pekerjaan {
+      margin: 5px auto 10px auto;
+      background-color: #ffffff;
+      color: black;
+      font-size: medium;
+      overflow: hidden;
+      border-radius: 5px;
+      height: 80px;
+    }
+
+    .pekerjaan>img {
+      margin-right: 5px;
+      float: left;
+      max-height: 100%;
+      border-radius: 5px;
+    }
+
+    .pekerjaan:hover {
+      background-color: #e6e6e6;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="wrapper">
+      <div class="logo">
+        <a href="home.html"><img src="logo/logo.png" alt=""></a>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="profil.html" class="akun"> Denata <img
+                style="border-radius:100%; width:30px; height:30px; object-fit:fill;" src="userImg/IMG_4781.JPG"
+                alt=""></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row my-4">
+      <div class="col-6">
+        <div class="daftarPekerjaan">
+          <h5 class="text-white">Pekerjaan Saya</h5>
+          <div id="pekerjaanSayaList"></div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="daftarPekerjaan">
+          <h5 class="text-white">Postingan Saya</h5>
+          <div id="postinganSayaList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalsContainer"></div>
+
+  <script>
+    const dataMelamar = [
+      {
+        namaPekerjaan: "Mengecat Tembok",
+        fotoPekerjaan: "imgJob/9dd0dc3543bc93115112807ca53945d3.jfif",
+        deskripsiPekerjaan: "Mengecat rumah 2 lantai di daerah Sleman.",
+        alamat: "Jl. Kaliurang KM 9",
+        waktuPekerjaan: "5 Jam",
+        status: "Diterima",
+        penilaian: "4.5",
+        nama: "Pak Budi",
+        email: "denatajp@gmail.com"
+      }
+    ];
+
+    const dataPostingan = [
+      {
+        namaPekerjaan: "Bersih Halaman",
+        foto: "imgJob/9dd0dc3543bc93115112807ca53945d3.jfif",
+        deskripsiPekerjaan: "Membersihkan halaman dari daun dan sampah.",
+        alamat: "Jl. Magelang KM 5",
+        waktuPekerjaan: "3 Jam",
+        statusPosting: "Selesai",
+        kodePekerjaan: "PK001",
+        pekerjaNama: "Andi",
+        nilai: "4.8"
+      },
+      {
+        namaPekerjaan: "Perbaikan Atap",
+        foto: "imgJob/9dd0dc3543bc93115112807ca53945d3.jfif",
+        deskripsiPekerjaan: "Memperbaiki atap bocor di rumah.",
+        alamat: "Jl. Parangtritis KM 10",
+        waktuPekerjaan: "2 Hari",
+        statusPosting: "Sudah ada pekerja",
+        kodePekerjaan: "PK002",
+        pekerjaNama: "Denata",
+        nilai: ""
+      }
+    ];
+
+    const statusIcon = {
+      "kirim": '<i class="bi bi-send-check"></i>',
+      "Diterima": '<i class="bi bi-check2 text-success"></i>',
+      "Ditolak": '<i class="bi bi-x-lg text-danger"></i>',
+      "Selesai": '<i class="bi bi-check2-all text-primary"></i>'
+    };
+
+    dataMelamar.forEach((item, index) => {
+      document.getElementById("pekerjaanSayaList").innerHTML += `
+        <button class="pekerjaan" data-bs-toggle="modal" data-bs-target="#modalSaya${index}">
+          <img src="${item.fotoPekerjaan}" alt="">
+          <h5>${item.namaPekerjaan}</h5>
+          <p>${item.alamat}</p>
+        </button>
+      `;
+
+      document.getElementById("modalsContainer").innerHTML += `
+        <div class="modal fade" id="modalSaya${index}" tabindex="-1">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">${item.namaPekerjaan}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <img class="img-fluid" src="${item.fotoPekerjaan}" alt="">
+                <p><i class="bi bi-card-text"></i> ${item.deskripsiPekerjaan}</p>
+                <p><i class="bi bi-geo-alt-fill"></i> ${item.alamat}</p>
+                <p><i class="bi bi-hourglass-split"></i> ${item.waktuPekerjaan}</p>
+                <p>Status: ${statusIcon[item.status] || ''} ${item.status}</p>
+                <p>Penilaian: ${item.penilaian}</p>
+              </div>
+              <div class="modal-footer">
+                <button onclick="window.location.href='mailto:${item.email}?subject=Lamaran Pekerjaan&body=Halo, ${item.nama}'" class="btn btn-success">Hubungi</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    dataPostingan.forEach((item, index) => {
+      console.log(item);
+      
+      document.getElementById("postinganSayaList").innerHTML += `
+        <button class="pekerjaan" data-bs-toggle="modal" data-bs-target="#modalPost${index}">
+          <img src="${item.foto}" alt="">
+          <h5>${item.namaPekerjaan}</h5>
+          <p>${item.alamat}</p>
+        </button>
+      `;
+
+      let nilaiString = "";
+      if (item.statusPosting === "Selesai") {
+        nilaiString = `<p><i class="bi bi-person"></i> ${item.pekerjaNama} | Nilai: ${item.nilai}</p>`
+      } else {
+        nilaiString = `<p style="text-align: center;"><i class="bi bi-person me-2"></i> <span> ${item.pekerjaNama} | <a style="text-decoration: none;" href="penilaian.html">Beri Penilaian</a></span> </p>`
+      }
+
+      document.getElementById("modalsContainer").innerHTML += `
+        <div class="modal fade" id="modalPost${index}" tabindex="-1">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">${item.namaPekerjaan}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <img class="img-fluid" src="${item.foto}" alt="">
+                <p><i class="bi bi-card-text"></i> ${item.deskripsiPekerjaan}</p>
+                <p><i class="bi bi-geo-alt-fill"></i> ${item.alamat}</p>
+                <p><i class="bi bi-hourglass-split"></i> ${item.waktuPekerjaan}</p>
+                <p>Status: ${item.statusPosting}</p>
+                ${nilaiString}
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-outline-danger">Hapus</button>
+                <button onclick="window.location.href='editPekerjaan.html'" class="btn btn-outline-warning">Ubah</button>
+                <button onclick="window.location.href='listPelamar.html'" class="btn btn-primary">Lihat Daftar Pelamar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  </script>
+</body>
+
+</html>

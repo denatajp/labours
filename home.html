@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Home User | Labours</title>
+    <style>
+        .daftarPekerjaan {
+            width: 100%;
+            height: 30em;
+            background-color: #0091A5;
+            border-radius: 5px;
+            padding: 3%;
+            overflow: auto;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            /* Lebar scrollbar */
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            /* Warna latar belakang track */
+        }
+
+        /* Thumb */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            /* Warna thumb */
+        }
+
+        /* Mouse-over effects */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            /* Warna thumb saat dihover */
+        }
+
+
+        .deskripsiPekerjaan {
+            width: 100%;
+            height: 30em;
+            background-color: #eee3ff;
+            border-radius: 5px;
+            padding: 1em;
+            overflow: auto;
+        }
+
+        .pekerjaan {
+            /* display: flex; */
+            margin: 5px auto;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+            color: black;
+            font-size: medium;
+            overflow: hidden;
+            border-radius: 5px;
+            /* width: 30em; */
+            height: 80px;
+        }
+
+        .pekerjaan>img {
+            margin-right: 5px;
+            float: left;
+            /* object-fit: fill; */
+            align-items: center;
+            max-height: 100%;
+            border-radius: 5px;
+
+        }
+
+        .pekerjaan:hover {
+            background-color: #e6e6e6;
+        }
+
+        .test:hover {
+            background-color: #000000;
+        }
+
+        .btn-primary {
+            background-color: #0091A5;
+        }
+
+        .btn-primary:hover {
+            background-color: #555;
+        }
+
+        .search-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-container input[type="search"] {
+            border-radius: 2rem;
+            padding: 6px 12px;
+            margin-right: 10em;
+            width: 250px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="wrapper">
+            <div class="logo">
+                <a href="home.html"><img href="home.html" src="logo/logo.png" alt=""></a>
+            </div>
+            <div class="menu d-flex align-items-center">
+                <div class="search-container">
+                    <form action="/search" method="get" class="me-5" class="form-control inline">
+                        <div class="input-group">
+                            <input class="form-control" name="keyword" type="search" placeholder="Cari pekerjaan"
+                                aria-label="Search">
+
+                        </div>
+                    </form>
+                </div>
+                <ul>
+                    <li><a href="profil.html" class="akun"> Denata <img
+                                style="border-radius:100%; width:30px; height:30px; object-fit:fill;"
+                                src="userImg/IMG_4781.JPG" alt=""></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row my-3">
+            <div class="col-6 d-flex align-items-center">
+                <h5 class="ms-3">Pilih pekerjaan anda</h5>
+            </div>
+
+            <div class="col-6 d-flex align-items-center">
+                <button class="btn btn-primary me-3" onclick="window.location.href = 'postingansaya.html';"
+                    style="background-color: #0091A5; text-align: left;"><i class="bi bi-list-task"></i> Postingan
+                    Saya</button>
+                <button class="btn btn-primary me-8" onclick="window.location.href = 'tambahpekerjaan.html';"
+                    style="background-color: #0091A5; text-align: left;"><i class="bi bi-plus-lg"></i> Tambah
+                    Pekerjaan</button>
+            </div>
+        </div>
+
+        <div class="row my-4">
+            <div class="col-4 d-flex align-items-center">
+                <div class="daftarPekerjaan">
+                    <div class="daftarPekerjaan">
+                        <button class="pekerjaan" onclick="tampilkanDeskripsi('mengecat')">
+                            <img src="imgJob/9dd0dc3543bc93115112807ca53945d3.jfif" alt="">
+                            <h5>Mengecat dinding</h5>
+                            <p>Yogyakarta</p>
+                        </button>
+                        <button class="pekerjaan" onclick="tampilkanDeskripsi('kuli')">
+                            <img src="imgJob/9dd0dc3543bc93115112807ca53945d3.jfif" alt="">
+                            <h5>Kuli bangunan</h5>
+                            <p>Bantul</p>
+                        </button>
+                        <button class="pekerjaan" onclick="tampilkanDeskripsi('kebun')">
+                            <img src="imgJob/9dd0dc3543bc93115112807ca53945d3.jfif" alt="">
+                            <h5>Membersihkan kebun</h5>
+                            <p>Sleman</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8 d-flex align-items-center">
+                <div class="deskripsiPekerjaan">
+                    <div class="deskripsiPekerjaan" id="deskripsi">
+                        <p class="text-muted">Klik salah satu pekerjaan untuk melihat deskripsi.</p>
+                    </div>
+
+                    <script>
+                        // pergi ke halaman lamar pekerjaan
+                        function lamarPekerjaan() {
+                            window.location.href = 'lamar-pekerjaan.html';
+                        }
+
+                        // Data statis pekerjaan
+                        const dataPekerjaan = {
+                            mengecat: {
+                                nama: 'Mengecat dinding',
+                                gambar: 'imgJob/9dd0dc3543bc93115112807ca53945d3.jfif',
+                                deskripsi: 'Mengecat dinding rumah tingkat dengan cat dan peralatan dari pemilik rumah.',
+                                lokasi: 'Jl. Kaliurang KM 8, Yogyakarta',
+                                durasi: '5 Jam'
+                            },
+                            kuli: {
+                                nama: 'Kuli bangunan',
+                                gambar: 'imgJob/9dd0dc3543bc93115112807ca53945d3.jfif',
+                                deskripsi: 'Membantu pengadukan semen dan pengangkutan bahan bangunan.',
+                                lokasi: 'Jl. Imogiri Timur, Bantul',
+                                durasi: '6 Jam'
+                            },
+                            kebun: {
+                                nama: 'Membersihkan kebun',
+                                gambar: 'imgJob/9dd0dc3543bc93115112807ca53945d3.jfif',
+                                deskripsi: 'Membersihkan daun dan semak liar dari kebun belakang rumah.',
+                                lokasi: 'Jl. Godean KM 7, Sleman',
+                                durasi: '3 Jam'
+                            }
+                        };
+
+                        // Fungsi untuk tampilkan deskripsi berdasarkan ID
+                        function tampilkanDeskripsi(kode) {
+                            const p = dataPekerjaan[kode];
+                            const deskripsiDiv = document.getElementById('deskripsi');
+
+                            deskripsiDiv.innerHTML = `
+            <div class="text-center">
+                <h4 class="mx-auto">${p.nama}</h4>
+                <img class="mx-auto" style="height: 300px;" src="${p.gambar}" alt="">
+            </div>
+            <hr>
+            <h4><i class="bi bi-card-text me-2"></i> ${p.deskripsi}</h4>
+            <br>
+            <h4><i class="bi bi-geo-alt-fill me-2"></i> ${p.lokasi}</h4>
+            <br>
+            <h4><i class="bi bi-hourglass-split me-2"></i> ${p.durasi}</h4>
+            <br>
+            <div class="text-end">
+                <button onclick="lamarPekerjaan()" class="btn text-light shadow-lg" style="background: #0091A5;"><i class="bi bi-send-fill"></i> Lamar</button>
+            </div>
+        `;
+                        }
+                    </script>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</body>
+
+</html>
